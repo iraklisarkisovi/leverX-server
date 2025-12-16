@@ -122,4 +122,8 @@ app.put("/api/editusers/:id", async (req, res) => {
   res.json({ message: "Updated successfully" });
 });
 
-export default app;  
+const PORT = 4000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
