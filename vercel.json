@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/index.js": {
+    "src/server.js": {
       "runtime": "nodejs20.x"
     }
   }
