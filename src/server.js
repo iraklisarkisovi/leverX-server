@@ -32,9 +32,8 @@ function saveUsers(users) {
 
 app.post("/api/sign-up", async (req, res) => {
   const { email, password, first_name, last_name, role } = req.body;
-  const users = await loadUsers(); // Load before accessing
+  const users = await loadUsers();  
 
-  // Basic input validation
   if (!email || !password || !first_name) {
     return res.status(400).json({ error: "Missing required fields" });
   }
