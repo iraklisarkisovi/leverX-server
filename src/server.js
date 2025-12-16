@@ -23,7 +23,7 @@ function saveUsers(users) {
 }
 
 
-app.post("/sign-up", async (req, res) => {
+app.post("/api/sign-up", async (req, res) => {
   const { email, password, first_name, last_name, role } = req.body;
   const users = loadUsers();
 
@@ -47,7 +47,7 @@ app.post("/sign-up", async (req, res) => {
   res.json({ userWithoutPass });
 });
 
-app.post("/sign-in", async (req, res) => {
+app.post("/api/sign-in", async (req, res) => {
   const { email, password } = req.body;
   const users = loadUsers();
   const user = users.find((u) => u.email === email);
@@ -60,12 +60,12 @@ app.post("/sign-in", async (req, res) => {
   res.json({id: user._id, role: user.role});
 });
 
-app.get("/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   const users = loadUsers().map(({ password, ...u }) => u);
   res.json(users);
 });
 
-app.get("/users/:id", (req, res) => {
+app.get("/api/users/:id", (req, res) => {
   const users = loadUsers();
   const user = users.find((u) => u._id === req.params.id);
 
@@ -75,11 +75,7 @@ app.get("/users/:id", (req, res) => {
   res.json(userWithoutPass);
 });
 
-app.listen(4000, () => {
-  console.log("Server running at http://localhost:4000");
-});
-
-app.put("/users/:id", (req, res) => {
+app.put("/api/users/:id", (req, res) => {
   const {newrole} = req.body;
   const users = loadUsers();
   const user = users.find((u) => u._id === req.params.id)
@@ -92,7 +88,7 @@ app.put("/users/:id", (req, res) => {
   res.json(user.role)
 })
 
-app.put("/editusers/:id", (req, res) => {
+app.put("/api/editusers/:id", (req, res) => {
   const updatedUser = req.body; 
   const users = loadUsers();
   const index = users.findIndex((u) => String(u._id) === req.params.id);
@@ -110,3 +106,5 @@ app.put("/editusers/:id", (req, res) => {
 
   res.json({ message: "updated successfully" });
 });
+
+export default app;
